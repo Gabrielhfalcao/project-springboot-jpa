@@ -46,8 +46,6 @@ public class User implements Serializable{
 		this.orders = orders;
 	}
 
-
-
 	public Long getId() {
 		return id;
 	}
