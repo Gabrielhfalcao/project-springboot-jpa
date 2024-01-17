@@ -2,14 +2,14 @@ package com.gabriel.teste.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_product")
@@ -25,21 +25,19 @@ public class Product implements Serializable{
 	private Double price;
 	private String imgUrl;
 	
-	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private Category category;
+	@Transient
+	private Set<Category> categories;
 	
 	public Product() {
 	}
 
-	public Product(Long id, String name, String description, Double price, String imgUrl, Category category) {
+	public Product(Long id, String name, String description, Double price, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
-		this.category = category;
 	}
 
 	public Long getId() {
@@ -82,12 +80,8 @@ public class Product implements Serializable{
 		this.imgUrl = imgUrl;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
+	public Set<Category> getCategory() {
+		return categories;
 	}
 
 	@Override
