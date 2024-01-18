@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 
 @Embeddable
 public class OrderItemPK implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
@@ -24,12 +25,15 @@ public class OrderItemPK implements Serializable {
 	public Order getOrder() {
 		return order;
 	}
+
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
 	public Product getProduct() {
 		return product;
 	}
+
 	public void setProduct(Product product) {
 		this.product = product;
 	}
@@ -64,5 +68,5 @@ public class OrderItemPK implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
