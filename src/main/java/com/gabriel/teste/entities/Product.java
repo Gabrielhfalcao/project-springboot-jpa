@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +28,9 @@ public class Product implements Serializable {
 	private String description;
 	private Double price;
 	private String imgUrl;
+
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
 
 	@ManyToMany
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -85,7 +91,16 @@ public class Product implements Serializable {
 	public Set<Category> getCategories() {
 		return categories;
 	}
-	
+
+	@JsonIgnore
+	public Set<OrderItem> getOrders() {
+		Set<OrderItem> set = new HashSet<>();
+		for (OrderItem order : set) {
+			set.add(order);
+		}
+		return set;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,5 +125,5 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }
