@@ -86,6 +86,14 @@ public class Order implements Serializable {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
+	
+	public Double getTotal() {
+		Double soma = 0.0;
+		for (OrderItem x : items) {
+			soma += x.getSubTotal();
+		}
+		return soma;
+	}
 
 	@Override
 	public int hashCode() {
