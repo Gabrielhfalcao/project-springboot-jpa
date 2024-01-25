@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1</version>
+		<version>3.2.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gabriel</groupId>
@@ -18,7 +18,8 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		<dependency>
+		<!--~~(org.springframework.boot:spring-boot-starter-web failed. Unable to download metadata. Tried repositories:
+https://repo.maven.apache.org/maven2: java.net.SocketTimeoutException: Connect timed out)~~>--><dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
