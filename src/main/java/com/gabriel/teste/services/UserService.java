@@ -13,6 +13,8 @@ import com.gabriel.teste.repositories.UserRepository;
 import com.gabriel.teste.services.exceptions.DatabaseException;
 import com.gabriel.teste.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	@Autowired
@@ -37,16 +39,21 @@ public class UserService {
 		} catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DatabaseException(e.getMessage())
+			throw new DatabaseException(e.getMessage());
 		}
 		
 	}
 	
 	public User updateById(Long id, User obj) {
-		User user = repository.getReferenceById(id);
-		user.setName(obj.getName());
-		user.setEmail(obj.getEmail());
-		user.setPhone(obj.getPhone());
-		return repository.save(user);
+		try {
+			User user = repository.getReferenceById(id);
+			user.setName(obj.getName());
+			user.setEmail(obj.getEmail());
+			user.setPhone(obj.getPhone());
+			return repository.save(user);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 }
